@@ -72,7 +72,6 @@ interface ThemeSourceGenerator {
                 |ext {
                 |    extName = '${source.name}'
                 |    extClass = '.${source.className}'
-                |    extFactory = '$themePkg'
                 |    extVersionCode = ${baseVersionCode + source.overrideVersionCode + multisrcLibraryVersion}
                 |    ${if (source.isNsfw) "isNsfw = true\n" else ""}
                 |}
@@ -101,15 +100,6 @@ interface ThemeSourceGenerator {
                 androidManifestOverride.copyTo(androidManifestFile)
             } else if (defaultAndroidManifest.exists()) {
                 defaultAndroidManifest.copyTo(androidManifestFile)
-            } else {
-                androidManifestFile.writeText(
-                    """
-                    |<?xml version="1.0" encoding="utf-8"?>
-                    |<!-- THIS FILE IS AUTO-GENERATED; DO NOT EDIT -->
-                    |<manifest />
-                    |
-                    """.trimMargin(),
-                )
             }
         }
 
